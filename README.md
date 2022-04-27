@@ -1,27 +1,47 @@
-# SampleApp2
+https://medium.com/rupesh-tiwari/how-to-deploy-angular-apps-to-github-pages-gh-pages-setup-ci-cd-for-angular-app-with-github-714c1e555de5
+https://betterprogramming.pub/building-angular-apps-using-github-actions-bf916b56ed0c
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.29.
+1. Creating a GitHub Config
+  - Go to the personal access tokens section in your GitHub settings.
+  - Generate a new token ( TOKEN_GITHUB_ACTION_TROOPER )  which has scope for repository access and copy its value.
 
-## Development server
+2. Create Angular Project
+   - ng new SampleApp
+   - npm i 
+  Update : 
+   - In the root folder of your angular project, create a new folder, .github, and create a subfolder workflows. 
+   - Create one final file, named main.yml, in the workflow folder.
+   - Copy conf and update TOKEN_GITHUB_ACTION_TROOPER if needed
+   - Add in Angular.json in "test" part juste behind builder :
+ "configurations": {
+  "production": {
+    "sourceMap": false,
+    "codeCoverage": true,
+    "browsers": "ChromeHeadless",
+    "watch": false
+  }
+},
+  
+3. Link with git
+create a new repository on the command line
+echo "# rez" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/<NameAccountGit>/<nameRepo>.git
+git push -u origin main
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+…or push an existing repository from the command line
+git remote add origin https://github.com/<NameAccountGit>/<nameRepo>.git
+git branch -M main
+git push -u origin main**
+  
+Go to the repository settings for your project at <repo url>/settings/secrets/actions. In the “Secrets” tab, add a new secret with the same token name from your workflow file (TOKEN_GITHUB_ACTION_TROOPER  in this project) and paste the token value.
 
-## Code scaffolding
+4. Deployed
+  Add in package.json
+  "deploy": "ng deploy --base-href=/<repoName>"
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.  k
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
