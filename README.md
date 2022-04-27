@@ -24,7 +24,7 @@ https://betterprogramming.pub/building-angular-apps-using-github-actions-bf916b5
   
 3. Link with git
 create a new repository on the command line
-echo "# rez" >> README.md
+echo "#" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
